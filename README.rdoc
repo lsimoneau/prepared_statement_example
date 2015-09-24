@@ -1,28 +1,7 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This app demonstrates the accumulation of single-use prepared statements on each db connection in ActiveRecord when some types of queries are used.
 
-Things you may want to cover:
+Just visit `/posts` and refresh the page and you should see a list of prepared statements at the bottom of the page, which will grow with each request.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+With apps scaled out to several application servers, each with lots of worker processes, you can quite easily have hundreds of connections, and if each of them is using a pool of 1000 prepared statements the db will likely run out of memory.
