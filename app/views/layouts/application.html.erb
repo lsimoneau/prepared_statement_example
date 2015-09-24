@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PreparedStatements</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<%= yield %>
+
+<div class="footer">
+  <% @statements = ActiveRecord::Base.connection.execute("SELECT * FROM pg_prepared_statements") %>
+  <h2>There are <%= @statements.count %> prepared statements on the connection</h2>
+  <ul>
+    <% @statements.each do |statement| %>
+      <li><%= statement["statement"] %></li>
+    <% end %>
+  </ul>
+</div>
+
+</body>
+</html>
