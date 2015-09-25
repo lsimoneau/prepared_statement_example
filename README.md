@@ -1,4 +1,5 @@
-== README
+README
+======
 
 This app demonstrates the accumulation of single-use prepared statements on each db connection in ActiveRecord when some types of queries are used.
 
